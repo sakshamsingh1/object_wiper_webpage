@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Object-WIPER for Video Object Removal">
+  <meta name="keywords" content="Object-WIPER, Object Removal">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Object-WIPER for Video Object Removal</title>
+
+  </script>
+  <style>
+  .hr {width: 100%; height: 1px; margin: 48px 0; background-color: #d6dbdf;}
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- custom css file  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<section class="hero banner">
+  <div class="hero-body">
+    <div class="container is-max-desktop head">
+      <div class="columns is-centered">
+        <div class="column has-text-centered head">
+          <div class="logo">
+          <a href="index.html">
+            <img src="./assets/images/logo.png" onmouseover="this.src='./assets/images/logo.png';" onmouseout="this.src='./assets/images/logo.png';" width="160px">
+          </a>
+          </div>
+          <br>
+
+          <h1 class="title is-3 publication-title"> 
+            <p>Object-WIPER: Training-Free Object and Associated Effect Removal in Videos</p>
+          </h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- first row -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/rollerblade/rollerblade.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/rollerblade/rollerblade_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Reflection</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/dog_4_1/dog_4_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/dog_4_1/dog_4_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Shadow</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/sand_glass_1_1/sand_glass_1_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/sand_glass_1_1/sand_glass_1_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Reflection</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/mallard-water/mallard-water.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/mallard-water/mallard-water_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="vertical" ratio="0.5556">
+            <div class="desc">Translucent</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/resize/flower_vase_1_2.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/resize/flower_vase_1_2_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+<!-- second row -->
+<section class="hero is-light is-small">
+  <div class="hero-body second-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Shadow</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/parkour/parkour.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/parkour/parkour_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Translucent</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/resize/cup_1_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/resize/cup_1_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Mirror</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/egg_plate_2_1/egg_plate_2_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/egg_plate_2_1/egg_plate_2_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/libby/libby.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/libby/libby_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Shadow</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/boat_3_1/boat_3_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/boat_3_1/boat_3_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+  </div>
+</section>
+
+<!-- third row -->
+<section class="hero is-light is-small">
+  <div class="hero-body second-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Reflection</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/egret_1_1/egret_1_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/egret_1_1/egret_1_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/bmx-trees/bmx-trees.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/bmx-trees/bmx-trees_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Reflection</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/dog_2_1/dog_2_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/dog_2_1/dog_2_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Translucent</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/cup_flower_1_1/cup_flower_1_1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/cup_flower_1_1/cup_flower_1_1_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/motocross-bumps/motocross-bumps.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/motocross-bumps/motocross-bumps_pred.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+<!-- <section class="teaser">
+  <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <ol type="a">
+              <br>
+              <li> <b>Row 1</b>: . </li>
+              <li> <b>Row 2</b>: . </li>
+              <li> <b>Row 3</b>: . </li>
+            </ol>
+          </div>
+          <div class="hr"></div>
+        </div>
+      </div>
+  </div>
+</section> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+          <div class="column">
+            <h2 class="title is-3">Demo Video</h2>
+            <div class="publication-video">
+              <iframe src="./object_wiper_demo.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ########################################## -->
+<h2 class="title is-3" style="margin-bottom: 1rem; text-align:center;">
+  Object Removal Comparison
+</h2>
+
+<div class="carousel collage-carousel">
+
+  <!-- first -->
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">GenProp</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/gen_prop.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/drift-straight/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!--  -->
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">GenProp</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/gen_prop.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/car-turn/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- third -->
+
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">GenProp</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/gen_prop.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid" autoplay muted loop>
+          <source src="./assets/videos_comp/mallard-fly/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="item">
+    <div class="collage-container">
+    </div>
+  </div> -->
+
+</div>
+
+<h3 class="title is-5" style="margin-bottom: 2rem; text-align:center;">
+  (DAVIS Dataset)
+</h3>
+
+<div class="carousel collage-carousel">
+
+  <!-- second -->
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Propainter</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/propainter.mp4" type="video/mp4">
+        </video>
+      </div>
+
+
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_fly_1_1/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Propainter</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/propainter.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/cat_1_4/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- third -->
+
+  <div class="item">
+    <div class="collage-container">
+      <div class="collage-item">
+        <div class="label">Input Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/orig.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Attentive-Eraser</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/attentive_eraser.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">KV-Edit-Video</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/kv_video.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">ROSE</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/rose.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Propainter</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/propainter.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="collage-item">
+        <div class="label">Object-WIPER (Ours)</div>
+        <video class="vid comparison-vid2" autoplay muted loop>
+          <source src="./assets/videos_comp/egret_2_1/ours.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="item">
+    <div class="collage-container">
+    </div>
+  </div> -->
+
+</div>
+
+<h3 class="title is-5" style="margin-bottom: 1rem; text-align:center;">
+  (WIPER-Bench Dataset)
+</h3>
+
+<section class="teaser">
+  <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content has-text-justified">
+            <ol type="a">
+              <br>
+              <!-- rows removed -->
+              <!-- rows removed -->
+              <!-- rows removed -->
+            </ol>
+          </div>
+          <div class="hr"></div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+<!-- ########################################## -->
+
+  <!-- custom js file  -->
+  <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/jquery.event.move.js"></script>
+  <script src="./assets/js/jquery.twentytwenty.js"></script>
+  <script>
+  $(function(){
+    $(".twentytwenty-container").twentytwenty();
+  });
+  </script>
+
+  <script>
+    document.querySelectorAll("video").forEach(v => {
+      v.playbackRate = 0.55;
+    });
+
+    document.querySelectorAll("video.comparison-vid").forEach(v => {
+      v.playbackRate = 0.3;
+    });
+
+    document.querySelectorAll("video.comparison-vid2").forEach(v => {
+      v.playbackRate = 0.5;
+    });
+  </script>
+
+  <!-- <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const vids = document.querySelectorAll("video.comparison-vid");
+
+    let loaded = 0;
+    vids.forEach(v => {
+      v.addEventListener("loadeddata", () => {
+        loaded++;
+        if (loaded === vids.length) {
+          // Reset all videos to time=0
+          vids.forEach(vid => vid.currentTime = 0);
+
+          setTimeout(() => {
+            vids.forEach(vid => vid.play());
+          }, 50);
+        }
+      });
+    });
+  });
+  </script> -->
+
+</body>
+</html>
